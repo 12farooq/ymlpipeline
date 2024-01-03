@@ -1,0 +1,19 @@
+Minikube typically creates its Kubernetes clusters in a user's home directory, not the system's root directory
+Minikube is designed to run Kubernetes clusters locally for development and testing purposes.minikube" directory in the home directory of the user who runs it, where it stores cluster configurations, data, and other necessary files.To avoid running Minikube as the root user and to ensure it operates within your user's home directory, you can run Minikube as a regular user without using "sudo." This is the recommended approach for local development and testing environments to maintain separation of privileges.
+
+
+  GNU nano 4.8                                                        /etc/fstab                                                                   # /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sda3 during installation
+UUID=8e8d868c-9323-4eb2-99e4-7ed9b2d31023 /               ext4    errors=remount-ro 0       1
+# /boot/efi was on /dev/sda1 during installation
+UUID=1E8E-5AC7  /boot/efi       vfat    umask=0077      0       1
+/swapfile                                 none            swap    sw              0       0
+
+
+
