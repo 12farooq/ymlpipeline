@@ -1,0 +1,54 @@
+https://minikube.sigs.k8s.io/docs/start/
+minikube start
+
+nano nginx-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+
+kubectl apply -f nginx-deployment.yaml
+
+nano nginx-service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80 
+  type: NodePort
+
+minikube service list
+ kubectl apply -f nginx-deployment.yaml
+ kubectl apply -f nginx-service.yaml
+kubectl get deployment
+kubectl get service
+
+
+
+
+
+
