@@ -1,0 +1,38 @@
+
+
+ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+ chmod +x minikube
+ sudo mv minikube /usr/local/bin/
+ minikube start
+nano nginx-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+kubectl apply -f nginx-deployment.yaml
+OUTPUT IS:
+deployment.apps/nginx-deployment created
+ kubectl expose deployment nginx-deployment --type=NodePort --port=80
+OUTPUT IS:
+service/nginx-deployment exposed
+ minikube ip
+OUTPUT IS:
+ minikube start
+ curl $(minikube ip):<NodePort>
