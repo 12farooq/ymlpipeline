@@ -1,0 +1,60 @@
+In this updated pipeline, a new step named "Build" is added before the "Archive Repository" step. You can customize the "Build" step with the necessary commands for your build process.
+
+This workflow now performs the following steps:
+
+Checkout Repository: Checks out the repository.
+Build: Runs your build commands.
+Archive Repository: Archives the repository.
+Upload Artifact: Uploads the archive as an artifact.
+SSH Server Deploy: Deploys the artifact to the SSH server.
+Feel free to replace the placeholder build commands with your actual build steps.
+
+
+name: Build, Zip, and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          # Add your build commands here
+          echo "Running build steps..."
+
+      - name: Archive Repository
+        run: |
+          zip -r ${{ github.workspace }}/archive.zip .
+        working-directory: ${{ github.workspace }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: ${{ github.workspace }}/archive.zip
+
+      - name: SSH Server Deploy
+        uses: kostya-ten/ssh-server-deploy@v4
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          scp_source: ${{ github.workspace }}/archive.zip
+          scp_target: ~/
+          before_script: |
+            df -h
+          after_script: |
+            whoami
+
+In many cases, especially with deployment pipelines, the term "Build" is used to represent any necessary preparation steps that need to be performed before deploying the application. This can include tasks such as installing dependencies, compiling code, running tests, or any other steps that are required to prepare the application for deployment.
+
+In the provided example, the "Build" step is a placeholder where you can insert any necessary actions or commands that are part of your application's preparation process. If your application does not require a build step and can be deployed directly without any pre-processing, you can skip the "Build" step or replace it with the specific actions needed for your use case. The key is to adapt the pipeline to suit the specific requirements of your application and deployment process.

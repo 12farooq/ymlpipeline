@@ -1,0 +1,37 @@
+ 
+ssh techpath@202.176.1.150
+ 
+ 
+sudo mkdir -p /var/www/priti.techpath.pro/public_html 
+sudo chown -R $USER:$USER /var/www/lokesh-k.techpath.pro/public_html 
+sudo chmod -R 755 /var/www/lokesh-k.techpath.pro/public_html 
+sudo find /var/www/lokesh-k.techpath.pro/public_html -type d -exec chmod g+s {} \; 
+sudo nano /etc/nginx/sites-available/priti.techpath.pro
+ 
+server { 
+    listen 80; 
+    server_name lokesh-k.techpath.pro; 
+    root /var/www/lokesh-k.techpath.pro/public_html; 
+    index index.php index.html; 
+    location / { 
+        try_files $uri $uri/ /index.php?$args; 
+    } 
+    location ~ \.php$ { 
+        include snippets/fastcgi-php.conf; 
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock; # Adjust the PHP version as needed 
+    } 
+    location ~ /\.ht { 
+        deny all; 
+    } 
+}
+ 
+ 
+sudo ln -s /etc/nginx/sites-available/sudo ln -s /etc/nginx/sites-available/priti.techpath.pro /etc/nginx/sites-enabled/ 
+sudo nginx -t 
+sudo systemctl restart nginx 
+sudo certbot --nginx -d lokesh-k.techpath.pro  
+
+special command only after deployments if database errore are generated
+sudo chown -R $USER:$USER /var/www/priti.techpath.pro/public_html if permission is needed.
+sudo chown -R www-data:www-data /var/www/priti.techpath.pro/public_html
+
