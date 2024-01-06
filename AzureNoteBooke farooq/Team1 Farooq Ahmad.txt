@@ -1,0 +1,180 @@
+[9/13/23 7:23 PM] Farooq Ahmad
+[10/3/23 1:25 PM] Farooq Ahmad
+azure-resource Notebook
+[10/5/23 3:07 PM] Farooq Ahmad
+Madhuri Sinha: Farooq Ahmad.docx
+sent on Thursday, September 21, 2023 6:59 PM
+ 
+[10/19/23 10:48 AM] Farooq Ahmad
+ skills: Written Communication, Git, Azure, ZOHO, MS Office, Any Desk, and Virtual Meeting platforms. 
+[10/19/23 6:38 PM] Farooq Ahmad
+ 
+ 
+[10/25/23 4:57 PM] Farooq Ahmad
+minikube deployments & service.txt
+[10/25/23 4:57 PM] Farooq Ahmad
+minikube deployments.txt
+[10/25/23 4:58 PM] Farooq Ahmad
+Minikube typically creates its Kube.txt
+[11/3/23 5:39 PM] Farooq Ahmad
+wordpress.zip
+[11/24/23 2:39 PM] Farooq Ahmad
+#!/bin/bash
+ 
+# This script creates a file named hello.txt
+ 
+# Define the file content
+
+file_content="Hello, this is the content of hello.txt."
+ 
+# Create hello.txt file
+
+echo "$file_content" > hello.txt
+ 
+# Display a message indicating the file creation
+
+echo "File hello.txt created with content:"
+
+cat hello.txt
+
+[11/24/23 2:45 PM] Farooq Ahmad
+chmod +x hello.sh
+
+./hello.sh
+
+[11/24/23 5:59 PM] Farooq Ahmad
+#!/bin/bash
+
+domain="test.techpath.pro"
+
+sudo mkdir -p /var/www/"$domain"/public_html
+
+sudo chown -R $USER:$USER /var/www/"$domain"/public_html
+
+sudo chmod -R 755 /var/www/"$domain"/public_html
+
+sudo find /var/www/"$domain"/public_html -type d -exec chmod g+s {} \;
+
+# Define the file content
+
+file_content="""server {
+
+    listen 80; 
+
+    server_name "$domain" www."$domain";
+ 
+    location / {
+ 
+        proxy_pass "$domain" www."$domain";  # Adjust the port if needed
+ 
+        proxy_set_header Host $host;
+ 
+        proxy_set_header X-Real-IP $remote_addr;
+ 
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ 
+    }
+ 
+} 
+
+"""
+
+# Create hello.txt file
+
+echo "$file_content" > /etc/nginx/sites-available/"$domain"
+
+sudo ln -s /etc/nginx/sites-available/"$domain" /etc/nginx/sites-enabled/
+
+sudo nginx -t
+
+sudo systemctl restart nginx
+
+
+# Display a message indicating the file creation
+
+echo "Site $domain is hosted!"
+[11/24/23 6:44 PM] Farooq Ahmad
+write a file in a ubuntu to install data mysql and apache
+ 
+#!/bin/bash
+ 
+# Update package list
+
+sudo apt update
+ 
+# Install Apache
+
+sudo apt install -y apache2
+ 
+# Enable Apache to start on boot
+
+sudo systemctl enable apache2
+ 
+# Start Apache
+
+sudo systemctl start apache2
+ 
+# Install MySQL Server
+
+sudo apt install -y mysql-server
+ 
+# Secure MySQL installation
+
+sudo mysql_secure_installation
+ 
+# Enable MySQL to start on boot
+
+sudo systemctl enable mysql
+ 
+# Start MySQL
+
+sudo systemctl start mysql
+ 
+echo "LAMP stack (Apache and MySQL) has been installed and configured."
+
+chmod +x install_lamp.sh
+
+./install_lamp.sh
+
+[11/25/23 11:54 AM] Farooq Ahmad
+#!/bin/bash
+ 
+# This is a simple R&D Bash script
+ 
+echo "Starting research and development..."
+ 
+# Your research and development code goes here
+ 
+# Example: Print the current date and time
+
+current_datetime=$(date '+%Y-%m-%d %H:%M:%S')
+
+echo "Current date and time: $current_datetime"
+ 
+# Example: List files in the current directory
+
+echo "Listing files in the current directory:"
+
+ls -l
+ 
+# End of the script
+
+echo "Research and development completed."
+
+[11/25/23 11:54 AM] Farooq Ahmad
+chmod +x research_and_development.sh
+
+[11/25/23 11:55 AM] Farooq Ahmad
+./research_and_development.sh
+
+
+[Saturday 12:42 PM] Sanjeev Kumar
+host: '202.176.1.150'
+
+          username: 'server'
+
+          password: 'sanjeev123'
+
+          local_file: ${{ github.workspace }}/archive.zip
+
+          remote_path: /media/server/data-5121/layer

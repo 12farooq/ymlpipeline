@@ -1,0 +1,481 @@
+name: ssh pipelines   on:   push:     b... by Farooq Ahmad
+12/16/23 6:34 PM
+Farooq Ahmad
+name: ssh pipelines
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  ssh-pipelines:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: ssh pipelines
+        uses: farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git@main  # Replace with the correct branch or tag name
+ 
+        # Define environment variables
+        env:
+          WELCOME: "ssh pipeline"
+ 
+        # Define input parameters for the action
+        with:
+          host: ${{ hub.techpath.pro }}  # Replace with the correct secret
+          user: ${{ farooq.ahmad }}  # Replace with the correct secret
+          pass: ${{ G]Rv$8W8 }}  # Replace with the correct secret
+          port: ${{ 22 }}  # Replace with the correct secret
+          connect_timeout: 10s
+ 
+          # Provide valid shell commands in the script
+          script: |
+            (rm -rf /home/github/test || true)
+            ls -la  
+            echo $WELCOME 
+            mkdir -p /home/github/test/test1 &&
+            mkdir -p /home/github/test/test2 &&
+ 
+            # Add, commit, and push changes to Git
+            git config --global user.email "Farooq@techpat.biz
+            git config --global user.name "Farooq"
+            git init
+            git add .
+            git commit -m "Commit message"
+            git remote add origin ssh://farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git
+            git branch -M main
+            git push -u origin main
+
+sudo service ssh status sudo systemctl st... by Farooq Ahmad
+12/16/23 6:37 PM
+Farooq Ahmad
+sudo service ssh status
+sudo systemctl status ssh
+sudo ufw status
+ssh -i /path/to/your/private-key farooq.ahmad@192.168.1.3
+ssh -oKexAlgorithms=diffie-hellman-group14-sha1 farooq.ahmad@192.168.1.3
+sudo chown -R $USER:$USER farooq.ahmad@192.168.1.3:
+December 18, 2023
+name: ssh pipelines   on:   push:     b... by Farooq Ahmad
+12/18/23 3:24 PM
+Farooq Ahmad
+name: ssh pipelines
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  ssh-pipelines:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: ssh pipelines
+        uses: farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git@main  # Replace with the correct branch or tag name
+ 
+        # Define environment variables
+        env:
+          WELCOME: "ssh pipeline"
+ 
+        # Define input parameters for the action
+        with:
+          host: ${{ hub.techpath.pro }}  # Replace with the correct secret
+          user: ${{ farooq.ahmad }}  # Replace with the correct secret
+          pass: ${{ G]Rv$8W8 }}  # Replace with the correct secret
+          port: ${{ 22 }}  # Replace with the correct secret
+          connect_timeout: 10s
+ 
+          # Provide valid shell commands in the script
+          script: |
+            (rm -rf /home/github/test || true)
+            ls -la  
+            echo $WELCOME 
+            mkdir -p /home/github/test/test1 &&
+            mkdir -p /home/github/test/test2 &&
+
+December 21, 2023
+- name: ssh-pipeline    uses: cross-the-w... by Farooq Ahmad
+12/21/23 3:38 PM
+Farooq Ahmad
+- name: ssh-pipeline
+   uses: cross-the-world/ssh-pipeline@v1.2.0
+   with:
+     # ssh remote host
+     host: 192.168.1.3  # Replace with your NAS server IP address
+     # ssh remote port
+     port: 22  # Optional, default is 22
+     # ssh remote user
+     user: farooq.ahmad  # Replace with your username
+     # content of ssh private key. ex raw content of ~/.ssh/id_rsa
+ 
+     key: secrets.SSH_PRIVATE_KEY }}  # Optional, use GitHub Secrets for security
+     # ssh remote password
+     pass: G]Rv$8W8   # Optional, use GitHub Secrets for security
+     # connection timeout to remote host
+     connect_timeout: 30s  # Optional, default is 30s
+     # execute commands on ssh
+     script: |
+      # Your deployment script or commands here
+      echo "Executing SSH pipeline"
+      mkdir -p /home/github/test/test1
+      mkdir -p /home/github/test/test2
+
+December 25, 2023
+name : ssh-pipeline on:   push :      bran... by Farooq Ahmad
+12/25/23 11:30 AM
+Farooq Ahmad
+name: ssh-pipeline
+on:
+  push:
+    branches:
+      - feature/scripts
+jobs:
+  deploy:
+    runs-on: GitHub
+     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+ 
+      - name: SSH Deploy
+        uses: cross-the-world/ssh-pipeline@v1.2.0
+        with:
+          host: https://github.com/12farooq/deploymentrepo.git
+          port: 22 # optional, default is 22
+          user: 12farooq
+          pass: 12345678@farooq # optional
+          connect_timeout: 30 # optional, default is 30s
+          script: |
+            # Your deployment script or commands go here
+            # For example:
+            echo "Hello, deploying your application!"
+            git pull origin feature/scripts
+            mkdir -p /home/github/test/test1
+            mkdir -p /home/github/test/test2
+ 
+GitHub - 12farooq/deploymentrepo
+Contribute to 12farooq/deploymentrepo development by creating an account on GitHub.
+github.com
+Link https://github.com/12farooq/testingrep... by Farooq Ahmad
+12/25/23 6:31 PM
+Farooq Ahmad
+https://github.com/12farooq/testingrepo.git
+name: ssh-pipeline   on:   push:     br... by Farooq Ahmad
+12/25/23 6:32 PM
+Farooq Ahmad
+name: ssh-pipeline
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+ 
+      - name: SSH Deploy
+        uses: cross-the-world/ssh-pipeline@v1.2.0
+        with: 
+          host: "" 
+          port: 22 # optional, default is 22
+          user: ""
+          pass: "" # optional
+          connect_timeout: 30 # optional, default is 30s
+          script: |
+            # Your deployment script or commands go here
+            # For example:
+            echo "Hello, deploying your application!"
+            cd /github.com/12farooq/deploymentrepo.git
+            git pull origin main
+            mkdir -p /home/github/test/test1
+            mkdir -p /home/github/test/test2
+trigger:   - main pool:   vmImage: 'u... by Farooq Ahmad
+12/25/23 6:33 PM
+Farooq Ahmad
+trigger:
+  - main
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+- task: CopyFilesOverSSH@0
+  displayName: 'Securely copy files to the remote machine'
+  inputs:
+    sshEndpoint: 'techpathinternalserver'
+    sourceFolder: '$(Build.ArtifactStagingDirectory)'
+    targetFolder: '/var/www/dev.techpath.pro/public_html'
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'techpathinternalserver'
+    runOptions: 'commands'
+    commands: |
+      echo "Starting";
+      cd /var/www/dev.techpath.pro/public_html/ && unzip -o $(Build.BuildId).zip
+      source /var/www/dev.techpath.pro/public_html/venv/bin/activate && pip3 install -r /var/www/dev.techpath.pro/public_html/s/requirements.txt;
+      rm /var/www/dev.techpath.pro/public_html/$(Build.BuildId).zip
+    readyTimeout: '20000'
+December 27, 2023
+name: django-deploy   on:   push:     b... by Farooq Ahmad
+12/27/23 12:13 PM
+Farooq Ahmad
+name: django-deploy
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+ 
+      - name: SSH Deploy
+        uses: cross-the-world/ssh-pipeline@v1.2.0
+        with: 
+          host: ""
+          port: 22 # optional, default is 22
+          user: ""
+          pass: "" # Use a secret for sensitive information (recommended)
+          connect_timeout: 30 # optional, default is 30s
+          script: |
+            # Your deployment script or commands go here
+            # For example:
+            echo "Hello, deploying your Django application!"
+            cd /path/to/your/django/project
+            git pull origin main
+            source /path/to/your/virtualenv/bin/activate
+            pip install -r requirements.txt
+            python manage.py migrate
+            python manage.py collectstatic --noinput
+            systemctl restart gunicorn  # or any other command to restart your Django server
+
+December 29, 2023
+name: Archive   on:   push:     branche... by Farooq Ahmad
+12/29/23 4:41 PM
+Farooq Ahmad
+name: Archive
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+ 
+    - name: Archive Repository
+      run: |
+        zip -r ${{ github.workspace }}/archive.zip .
+      working-directory: ${{ github.workspace }}
+ 
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: ${{ github.workspace }}/archive.zip
+It work for zip my repository by Farooq Ahmad
+12/29/23 4:42 PM
+Farooq Ahmad
+It work for zip my repository
+name: Archive and Copy to Local Server   on... by Farooq Ahmad
+12/29/23 7:05 PM
+Farooq Ahmad
+name: Archive and Copy to Local Server
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  archive_and_copy:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+ 
+    - name: Archive Repository
+      run: |
+        zip -r ${{ github.workspace }}/archive.zip .
+      working-directory: ${{ github.workspace }}
+ 
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: ${{ github.workspace }}/archive.zip
+ 
+    - name: Copy to Local Server
+      uses: appleboy/scp-action@master
+      with:
+        host: '192.168.1.3'
+        username: 'techpathadmin'
+        password: 'newLappy@29092022'
+        source: ${{ github.workspace }}/archive.zip
+        target: '/volume1/sharedemp'
+
+Saturday
+path: /volume1/sharedemp user: techpathadmi... by Farooq Ahmad
+Saturday 10:27 AM
+Farooq Ahmad
+path: /volume1/sharedemp
+user: techpathadmin
+pass: newLappy@29092022
+host: 192.168.1.3
+Monday
+Run zip -r /home/runner/work/deployrepo/dep... by Farooq Ahmad
+Monday 12:19 PM
+Farooq Ahmad
+Run zip -r /home/runner/work/deployrepo/deployrepo/archive.zip .
+  zip -r /home/runner/work/deployrepo/deployrepo/archive.zip .
+  shell: /usr/bin/bash -e {0}
+  adding: ttt.html (stored 0%)
+  adding: indx.html (deflated 29%)
+  adding: config.yml (deflated 56%)
+  adding: .git/ (stored 0%)
+  adding: .git/shallow (stored 0%)
+  adding: .git/logs/ (stored 0%)
+  adding: .git/logs/refs/ (stored 0%)
+  adding: .git/logs/refs/heads/ (stored 0%)
+  adding: .git/logs/refs/heads/main (deflated 28%)
+  adding: .git/logs/refs/remotes/ (stored 0%)
+  adding: .git/logs/refs/remotes/origin/ (stored 0%)
+  adding: .git/logs/refs/remotes/origin/main (deflated 39%)
+  adding: .git/logs/HEAD (deflated 29%)
+  adding: .git/hooks/ (stored 0%)
+  adding: .git/hooks/pre-commit.sample (deflated 45%)
+  adding: .git/hooks/post-update.sample (deflated 27%)
+  adding: .git/hooks/pre-push.sample (deflated 49%)
+  adding: .git/hooks/update.sample (deflated 68%)
+  adding: .git/hooks/pre-merge-commit.sample (deflated 39%)
+  adding: .git/hooks/pre-rebase.sample (deflated 59%)
+  adding: .git/hooks/applypatch-msg.sample (deflated 42%)
+  adding: .git/hooks/prepare-commit-msg.sample (deflated 50%)
+  adding: .git/hooks/sendemail-validate.sample (deflated 58%)
+  adding: .git/hooks/push-to-checkout.sample (deflated 55%)
+  adding: .git/hooks/fsmonitor-watchman.sample (deflated 62%)
+  adding: .git/hooks/commit-msg.sample (deflated 44%)
+  adding: .git/hooks/pre-receive.sample (deflated 40%)
+  adding: .git/hooks/pre-applypatch.sample (deflated 38%)
+  adding: .git/config (deflated 28%)
+  adding: .git/index (deflated 29%)
+  adding: .git/refs/ (stored 0%)
+  adding: .git/refs/tags/ (stored 0%)
+  adding: .git/refs/heads/ (stored 0%)
+  adding: .git/refs/heads/main (stored 0%)
+  adding: .git/refs/remotes/ (stored 0%)
+  adding: .git/refs/remotes/origin/ (stored 0%)
+  adding: .git/refs/remotes/origin/main (stored 0%)
+  adding: .git/FETCH_HEAD (deflated 31%)
+  adding: .git/info/ (stored 0%)
+  adding: .git/info/exclude (deflated 28%)
+  adding: .git/branches/ (stored 0%)
+  adding: .git/description (deflated 14%)
+  adding: .git/objects/ (stored 0%)
+  adding: .git/objects/a4/ (stored 0%)
+  adding: .git/objects/a4/536036e81548251accd2f7701a1945e8049bee (stored 0%)
+  adding: .git/objects/pack/ (stored 0%)
+  adding: .git/objects/9e/ (stored 0%)
+  adding: .git/objects/9e/a6903c0fa9d33917c396bc53e608ef76dec4f7 (stored 0%)
+  adding: .git/objects/74/ (stored 0%)
+  adding: .git/objects/74/b20484ce488c5f935b0308f7c59686b2c3d317 (stored 0%)
+  adding: .git/objects/info/ (stored 0%)
+  adding: .git/objects/54/ (stored 0%)
+  adding: .git/objects/54/38836b9cbe83686495bbaa6c4a616b2fdcc986 (stored 0%)
+  adding: .git/objects/e1/ (stored 0%)
+  adding: .git/objects/e1/e0b59da3e7cd79f664b7be82716342efbcad42 (stored 0%)
+  adding: .git/objects/13/ (stored 0%)
+  adding: .git/objects/13/6334c736dafb916091739848b09efa1b1f56f6 (stored 0%)
+  adding: .git/objects/60/ (stored 0%)
+  adding: .git/objects/60/ca24708b90538d9458fe5ae2a84f2cb817301f (stored 0%)
+  adding: .git/objects/1b/ (stored 0%)
+  adding: .git/objects/1b/4e835a9bdbc5707b4933ff0c6730d47eef9194 (stored 0%)
+  adding: .git/HEAD (stored 0%)
+  adding: .github/ (stored 0%)
+  adding: .github/workflows/ (stored 0%)
+  adding: .github/workflows/main.yml (deflated 55%)
+ 
+- name: Archive Repository
+  run: zip -r ${{ github.workspace }}/archive.zip .
+  working-directory: ${{ github.workspace }}
+
+name: Archive and Deploy   on:   push: ... by Farooq Ahmad
+Monday 12:19 PM
+Farooq Ahmad
+name: Archive and Deploy
+ 
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  archive_and_deploy:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+ 
+      - name: Archive Repository
+        run: |
+          zip -r ${{ github.workspace }}/archive.zip .
+        working-directory: ${{ github.workspace }}
+ 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: ${{ github.workspace }}/archive.zip
+ 
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: '202.176.1.150'
+          username: 'server'
+          password: 'sanjeev123'
+          script: |
+            mkdir -p /media/server/data-5121/layer
+            unzip -o $GITHUB_WORKSPACE/archive.zip -d /media/server/data-5121/layer
+
+Yesterday
+Automation:   GitHub Actions automates repe... by Farooq Ahmad
+Thursday 10:25 AM
+Farooq Ahmad
+Automation:
+ 
+GitHub Actions automates repetitive tasks, reducing the manual effort required to build, test, and deploy code. 
+The YAML configuration allows you to specify jobs, steps, and actions in a structured manner, making it easier to manage complex workflows.
+Parallel and Matrix Builds:
+ 
+GitHub Actions supports parallel and matrix builds. Parallel builds can speed up the overall workflow by running multiple jobs simultaneously. Matrix builds allow you to test your code against different environments or configurations in a single workflow.
+ 
+Integration with GitHub:
+ 
+GitHub Actions is tightly integrated with GitHub repositories. Workflows are triggered automatically based on events, such as code pushes, pull requests, or issue comments. This integration simplifies the setup and execution of CI/CD processes.
+Community Actions . This ensures that sensitive information is handled securely during the automation process.
+ 
+ 
+GitHub Workflows and YAML pipelines provide a powerful and flexible way to automate various aspects of your development process, leading to increased efficiency, faster development cycles, and more reliable software deployments.
+ 
+GitHub Actions is a more modern, integrated solution closely tied to GitHub repositories, while Jenkins is a highly customizable and extensible automation server that has been a staple in the CI/CD landscape for many years. The choice between them often depends on specific project requirements, team preferences, and existing infrastructure.
+has context menu

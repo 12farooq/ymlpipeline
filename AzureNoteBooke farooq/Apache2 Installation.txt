@@ -1,0 +1,14 @@
+Apache2 Installation
+Introduction 
+
+ 
+
+A LAMP stack is a group of four open-source software components that form the foundation of building and running high-performance dynamic websites and web applications. It's an acronym for Linux, Apache, MySQL/MariaDB and PHP. 
+
+  
+
+The LAMP stack is simple, stable, and powerful, and its first layer is comprised of the popular Linux Operating System with flexible configuration options and tight security. Apache is the second layer in the pile and offers you compiled module support for major scripting languages such as PHP, Perl, Python, Node.js, etc. This HTTP web server delivers web content through the internet. When it comes to the database layer, you've two options when deploying a LAMP stack. You can either use MySQL or MariaDB as an Relational Database Management System (RDMS) for your web applications. The last package in the list is PHP. This is a scripting language that you can easily embed in HTML documents to create static or dynamic websites. 
+
+  
+
+The majority of modern Content Management Systems (CMS) such as WordPress, Joomla, Drupal, and Magento require a LAMP stack to work. Therefore, in this guide, you'll learn how to configure the right environment for them. The same setup will also work for any custom web application that you may intend to build with the LAMP stack technology. 

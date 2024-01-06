@@ -1,0 +1,55 @@
+
+Genrating Access-Secret
+To obtain the `tenant_id`, `client_id`, and `client_secret` for accessing Azure Key Vault, you need to follow these steps: 
+
+ 
+
+1. Sign in to the Azure portal (https://portal.azure.com). 
+
+ 
+
+2. In the Azure portal, navigate to the Azure Active Directory (Azure AD) tenant associated with your subscription. 
+
+ 
+
+3. Go to the "App registrations" or "Azure AD App Registrations" section. 
+
+ 
+
+4. Click on "New registration" or "Register an application" to create a new Azure AD application. 
+
+ 
+
+5. Provide a name for your application, select the appropriate account type (single-tenant or multi-tenant), and specify the redirect URI if needed. 
+
+ 
+
+6. After registering the application, you'll be redirected to the application's overview page. Note down the "Application (client) ID" value, which represents the `client_id` in your code. 
+
+ 
+
+7. Go to the "Certificates & secrets" or "Client secrets" section. 
+
+ 
+
+8. Click on "New client secret" or "New client secret" to create a new client secret for your application. Provide a description and select the expiration duration. 
+
+ 
+
+9. Once the client secret is generated, note down the value. This is your `client_secret` in the code. 
+
+ 
+
+10. In the Azure portal, go to the "Azure Active Directory" section. 
+
+ 
+
+11. Click on "Properties" to access the properties of your Azure AD tenant. 
+
+ 
+
+12. Note down the "Directory (tenant) ID" value. This is your `tenant_id` in the code. 
+
+ 
+
+By following these steps, you can obtain the `tenant_id`, `client_id`, and `client_secret` required for authenticating and accessing Azure Key Vault using a service principal (Azure AD application). Make sure to keep the `client_secret` secure and not expose it in any publicly accessible code or configuration files. 

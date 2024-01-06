@@ -1,0 +1,56 @@
+
+
+`ftp cnvert into https command
+
+sudo apt update
+sudo apt install apache2
+sudo a2enmod ssl
+sudo a2enmod headers
+sudo systemctl restart apache2
+Step 3: Obtain an SSL/TLS Certificate
+You can obtain an SSL/TLS certificate from a trusted Certificate Authority (CA). A popular and free CA is Let's Encrypt.
+
+Install Certbot (Let's Encrypt client) on your system:
+sudo apt install certbot
+sudo certbot certonly --webroot -w /var/www/html -d your_domain.com
+This command will request a certificate using the webroot plugin and place the challenge files in the /var/www/html directory
+Step 4: Configure Apache for HTTPS
+
+Create an Apache configuration file for your virtual host using HTTPS:
+sudo nano /etc/apache2/sites-available/your_domain.com.conf
+Add the following configuration to the file. Replace your_domain.com with your actual domain, and adjust the paths if necessary:
+
+
+
+<VirtualHost *:80>
+    ServerName your_domain.com
+    ServerAlias www.your_domain.com
+    Redirect permanent / https://your_domain.com/
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName your_domain.com\
+    ServerAlias www.your_domain.com
+
+    DocumentRoot /var/www/html
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/your_domain.com/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/your_domain.com/privkey.pem
+
+    <FilesMatch "\.(cgi|shtml|phtml|php)$">
+        SSLOptions +StdEnvVars
+    </FilesMatch>
+    <Directory /usr/lib/cgi-bin>
+        SSLOptions +StdEnvVars
+    </Directory>
+
+    # Other Apache configurations (if needed)...
+
+</VirtualHost>
+
+
+sudo a2ensite your_domain.com.conf
+sudo apache2ctl configtest
+sudo systemctl restart apache2 
+

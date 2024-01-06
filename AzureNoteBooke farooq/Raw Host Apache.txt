@@ -1,0 +1,179 @@
+Raw Host Apache
+
+sudo mkdir -p /var/www/dev.foliagelandscaping.com.au/public_html 
+
+  
+
+sudo chown -R $USER:$USER /var/www/dev.foliagelandscaping.com.au/public_html 
+
+  
+
+sudo chmod -R 755 /var/www/dev.foliagelandscaping.com.au/public_html 
+
+  
+
+sudo find /var/www/dev.foliagelandscaping.com.au/public_html -type d -exec chmod g+s {} \; 
+
+  
+
+sudo nano /etc/apache2/sites-available/dev.foliagelandscaping.com.au.conf 
+
+  
+
+<VirtualHost *:80> 
+
+  
+
+    ServerName dev.foliagelandscaping.com.au 
+
+  
+
+    ServerAdmin admin@foliagelandscaping.com.au 
+
+  
+
+    DocumentRoot /var/www/dev.foliagelandscaping.com.au/public_html 
+
+  
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log 
+
+  
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined 
+
+  
+
+</VirtualHost> 
+
+  
+
+sudo a2ensite dev.foliagelandscaping.com.au.conf 
+
+  
+
+sudo a2dissite 000-default.conf 
+
+  
+
+sudo systemctl restart apache2 
+
+  
+
+sudo nano /var/www/dev.foliagelandscaping.com.au/public_html/index.html 
+
+  
+
+<html> 
+
+  
+
+  <head> 
+
+  
+
+    <title>This is dev.foliagelandscaping.com.au website</title> 
+
+  
+
+  </head> 
+
+  
+
+  <body> 
+
+  
+
+    <h1>This is <b>dev.foliagelandscaping.com.au</b> website.</h1> 
+
+  
+
+  </body> 
+
+  
+
+</html> 
+
+ 
+
+sudo apache2ctl configtest 
+
+sudo certbot --apache 
+
+
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+8 
+
+9 
+
+10 
+
+11 
+
+12 
+
+13 
+
+14 
+
+15 
+
+16 
+
+17 
+
+18 
+
+<VirtualHost *:443> 
+
+        ServerName  dev.techpath.pro 
+
+        ServerAdmin sanjeev@techpath.biz 
+
+        DocumentRoot /var/www/dev.techpath.pro/public_html 
+
+  
+
+        WSGIDaemonProcess flaskapp threads=5 
+
+        WSGIScriptAlias / /var/www/dev.techpath.pro/public_html/flaskapp.wsgi 
+
+        WSGIApplicationGroup %{GLOBAL} 
+
+        <Directory flaskapp> 
+
+             WSGIProcessGroup flaskapp 
+
+             WSGIApplicationGroup %{GLOBAL} 
+
+             Order deny,allow 
+
+             Allow from all 
+
+        </Directory> 
+
+  
+
+        ErrorLog ${APACHE_LOG_DIR}/flaskapp-error.log 
+
+        CustomLog ${APACHE_LOG_DIR}/flaskapp-access.log combined 
+
+</VirtualHost> 
+
+ 
+
+From <https://tecadmin.net/deploying-flask-application-on-ubuntu-apache-wsgi/>
