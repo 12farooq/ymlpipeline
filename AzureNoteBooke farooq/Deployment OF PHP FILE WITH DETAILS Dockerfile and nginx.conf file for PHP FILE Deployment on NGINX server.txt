@@ -1,0 +1,155 @@
+ssh techpath@202.176.1.189
+$ cd /var/www/farooq.techpath.pro
+ ls
+ unzip  'talwalkar (2).zip'  ( 'toke_generation (2).zip' file name )
+
+
+ sudo mkdir -p /var/www/farooq.techpath.pro/public_html
+sudo chown -R $USER:$USER /var/www/farooq.techpath.pro/public_html
+sudo chmod -R 755 /var/www/farooq.techpath.pro/public_html
+ sudo find /var/www/farooq.techpath.pro/public_html -type d -exec chmod g+s {} \;
+sudo nano /etc/nginx/sites-available/farooq.techpath.pro
+sudo ln -s /etc/nginx/sites-available/farooq.techpath.pro /etc/nginx/sites-enabled/
+sudo nginx -t
+ sudo systemctl restart nginx
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d farooq.techpath.pro -d www.farooq.techpath.pro nohup python3 app.py
+ nohup python3 app.py
+ python3 -m venv myenv
+  source myenv/bin/activate
+sudo apt install nginx php-fpm 
+
+sudo apt install nginx php-fpm mysql-server php-mysql 
+
+sudo apt install certbot python3-certbot-nginx 
+
+sudo apt install python3 python3-pip nginx 
+
+  
+
+For Wordpress/ React/ html/ Static 
+
+server { 
+
+    listen 80; 
+
+    server_name farooq.techpath.pro; 
+
+ 
+    root /var/www/farooq.techpath.pro/public_html; 
+
+    index index.php index.html; 
+
+    location / { 
+
+        try_files $uri $uri/ /index.php?$args; 
+
+    } 
+ 
+    location ~ \.php$ { 
+
+        include snippets/fastcgi-php.conf; 
+
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock; # Adjust the PHP version as needed 
+
+    } 
+ 
+    location ~ /\.ht { 
+
+        deny all; 
+
+    } 
+
+} 
+
+ 
+
+ 
+
+Installing SSL  
+sudo certbot --nginx -d api.atnd.techpath.pro -d www.api.atnd.techpath.pro 
+
+
+DOCKER FILE FOR PHP DEPLOMENT ON NGINX SERVER
+
+nano Dockerfile
+
+# Use the official PHP image with PHP-FPM
+FROM php:7.4-fpm
+
+# Install the PHP extensions you need (e.g., PDO and PDO MySQL)
+RUN docker-php-ext-install pdo pdo_mysql
+
+# Set the working directory inside the container
+WORKDIR /var/www/farooq.techpath.pro/public_html
+
+# Copy your PHP application files into the container
+COPY . /var/www/farooq.techpath.pro/public_html
+
+# Install Nginx
+RUN apt-get update && apt-get install -y nginx
+
+# Remove the default Nginx site configuration
+RUN rm /etc/nginx/sites-enabled/default
+
+# Test the Nginx configuration
+RUN nginx -t
+
+# Expose port 8086 for HTTP
+EXPOSE 8086
+
+# Start Nginx and PHP-FPM when the container runs
+CMD ["nginx", "-g", "daemon off;"]
+
+ docker build -t  php-app .  ( php-app  image name)
+docker images
+docker run -d -p 8086:8086 php-app
+
+
+FOR PORT CONFLICT 
+# Find the process using port 8086
+sudo lsof -i :8086
+
+# Kill the process (replace PID with the actual process ID)
+sudo kill PID
+
+NGINX.CONF FILE FOR PHP DOCKER ACCORDING TO (with respect to Dockerfile)
+nano nginx.conf
+
+# Use the default Nginx base image configuration
+# It includes user www-data and worker_processes auto, among others.
+
+# Define the server block for your PHP application
+server {
+    listen 8086; # Listen on port 8086 for incoming HTTP requests
+    server_name localhost; # You can change this to your domain name
+
+    # Define the document root where your PHP files are located
+    root /var/www/farooq.techpath.pro/public_html;
+
+    # Index files to serve (index.php as the default)
+    index index.php;
+
+    # Location block for handling PHP files
+    location ~ \.php$ {
+        fastcgi_pass php-fpm:9000; # PHP-FPM service address and port
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    # Additional Nginx configuration can be added here as needed
+    # For example, you can add error handling, access controls, etc.
+
+    # Add any other location blocks for static files, if necessary
+
+    # Configure error and access logs (optional)
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+}
+
+# Additional server blocks and configurations can be added as needed
+
+
+
+

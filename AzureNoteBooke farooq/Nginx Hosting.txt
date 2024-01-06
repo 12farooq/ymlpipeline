@@ -1,0 +1,135 @@
+Nginx Hosting
+
+sudo mkdir -p /var/www/api.atnd.techpath.pro/public_html 
+
+  
+
+sudo chown -R $USER:$USER /var/www/api.atnd.techpath.pro/public_html 
+
+ 
+
+sudo chmod -R 755 /var/www/api.atnd.techpath.pro/public_html 
+
+ 
+
+sudo find /var/www/api.atnd.techpath.pro/public_html -type d -exec chmod g+s {} \; 
+
+ 
+
+sudo nano /etc/nginx/sites-available/api.atnd.techpath.pro 
+
+ 
+
+ 
+
+For proxy website like docker and python  
+
+server { 
+
+    listen 80; 
+
+    server_name api.atnd.techpath.pro; 
+
+ 
+
+    location / { 
+
+        proxy_pass http://127.0.0.1:5000;  # Adjust the port if needed 
+
+        proxy_set_header Host $host; 
+
+        proxy_set_header X-Real-IP $remote_addr; 
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+
+    } 
+
+} 
+
+
+
+For Wordpress/ React/ html/ Static 
+
+server { 
+
+    listen 80; 
+
+    server_name your-website.com www.your-website.com; 
+
+ 
+
+    root /var/www/html/your-website; 
+
+    index index.php index.html; 
+
+ 
+
+    location / { 
+
+        try_files $uri $uri/ /index.php?$args; 
+
+    } 
+
+ 
+
+    location ~ \.php$ { 
+
+        include snippets/fastcgi-php.conf; 
+
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock; # Adjust the PHP version as needed 
+
+    } 
+
+ 
+
+    location ~ /\.ht { 
+
+        deny all; 
+
+    } 
+
+} 
+
+ 
+
+ 
+
+ 
+
+sudo ln -s /etc/nginx/sites-available/api.atnd.techpath.pro /etc/nginx/sites-enabled/ 
+
+ 
+
+sudo nginx -t 
+
+ 
+
+sudo systemctl restart nginx 
+
+ 
+
+ 
+
+ 
+
+sudo certbot --nginx -d dev.techpath.biz 
+
+
+
+
+sudo apt install nginx php-fpm 
+
+sudo apt install nginx php-fpm mysql-server php-mysql 
+
+sudo apt install certbot python3-certbot-nginx 
+
+sudo apt install python3 python3-pip nginx 
+
+ 
+
+ 
+
+ 
+
+Installing SSL  
+sudo certbot --nginx -d api.atnd.techpath.pro -d www.api.atnd.techpath.pro 

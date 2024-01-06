@@ -1,0 +1,141 @@
+domain name server hosting
+
+
+
+
+ssh farooq@202.176.1.189  
+password: pyarmedhokha
+ sudo chown -R farooq:farooq /etc/apache2/sites-available/
+  cd /www/html/farooq/
+ls
+ unzip reactdoc.zip
+sudo mkdir -p /var/www/farooq.techpath.pro/public_html
+
+ 
+
+ 
+
+sudo chown -R $USER:$USER /var/www/farooq.techpath.pro/public_html
+
+ 
+
+ 
+
+sudo chmod -R 755 /var/www/farooq.techpath.pro/public_html
+
+ 
+
+ 
+
+sudo find /var/www/farooq.techpath.pro/public_html -type d -exec chmod g+s {} \;
+
+ 
+
+ 
+
+sudo nano /etc/apache2/sites-available/farooq.techpath.pro.conf
+
+ 
+
+ 
+
+<VirtualHost *:80>
+   ServerName farooq.techpath.pro
+   ServerAdmin admin@foliagelandscaping.com.au
+   DocumentRoot /var/www/farooq.techpath.pro/public_html
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+ 
+
+ 
+
+sudo a2ensite farooq.techpath.pro.conf
+
+ 
+
+ 
+
+ 
+
+ 
+
+sudo systemctl restart apache2
+
+ 
+
+ 
+
+sudo nano /var/www/farooq.techpath.pro/public_html/index.html
+
+ 
+
+ 
+
+<html>
+
+ 
+
+ 
+
+<head>
+
+ 
+
+ 
+
+   <title>This is farooq.techpath.pro website</title>
+
+ 
+
+ 
+
+</head>
+
+ 
+
+ 
+
+<body>
+
+ 
+
+ 
+
+   <h1>This is <b>farooq.techpath.pro</b> website.</h1>
+
+ 
+
+ 
+
+</body>
+
+ 
+
+ 
+
+</html>
+
+ 
+
+ 
+
+sudo apache2ctl configtest
+
+
+
+phir build command chalany ke liye apny laptop ke folder me jaker cmd open karke aur npm command chalaingyn 
+
+npm i
+npm run build 
+build karny ke bad zip kardengyn build.zip file ko filezila pe aakar uski location se select karke server site pe aaker var/www/farooq.techpath.pro pe upload karegyn
+uske baad unzip karegyn cmd pe 
+farooq1@techpath-HP-EliteDesk-800-G1-USDT:~$ cd /var/www/farooq.techpath.pro
+farooq1@techpath-HP-EliteDesk-800-G1-USDT:/var/www/farooq.techpath.pro$ ls  (zip file details ke liye)
+build.zip  public_html
+farooq1@techpath-HP-EliteDesk-800-G1-USDT:/var/www/farooq.techpath.pro$ unzip build.zip
+
+usky baad UNZIP File copy karegyn public_html (/var/www/farooq.techpath.pro/public_html) me 
+
+USKY BAAD CHECK KARLENGYN farooq.techpath.pro se internet ke zarye

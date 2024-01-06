@@ -1,0 +1,75 @@
+Adding Group in Ubuntu
+
+In Unix-like systems, including Ubuntu, a file or directory can have only one owner and one group owner. However, you can add multiple users to a group, and then assign that group as the group owner of the directory. This allows multiple users to have shared access to the directory. 
+
+ 
+
+Here are the steps to add multiple users to a group and assign that group as the group owner of a directory: 
+
+ 
+
+1. Create a Group (if not already created): 
+
+ 
+
+   You can create a new group using the `sudo groupadd` command. Replace `<groupname>` with the desired group name. 
+
+ 
+
+   ```bash 
+
+   sudo groupadd <groupname> 
+
+   ``` 
+
+ 
+
+2. Add Users to the Group: 
+
+ 
+
+   Use the `sudo usermod -aG` command to add users to the group. Replace `<username>` with the usernames of the users you want to add, and `<groupname>` with the name of the group you created in step 1. 
+
+ 
+
+   ```bash 
+
+   sudo usermod -aG <groupname> <username1> 
+
+   sudo usermod -aG <groupname> <username2> 
+
+   # Add more users as needed 
+
+   ``` 
+
+ 
+
+3. Change the Group Owner of the Directory: 
+
+ 
+
+   You can use the `chown` command to change the group owner of the directory to the group you created. Replace `<directory>` with the directory path. 
+
+ 
+
+   ```bash 
+
+   sudo chown -R :<groupname> <directory> 
+
+   ``` 
+
+ 
+
+   For example, if you have a directory named `/var/www/api.ecommerce.techpath.pro/public_html` and you want to assign it to the group named `mygroup`, you would run: 
+
+ 
+
+   ```bash 
+
+   sudo chown -R :mygroup /var/www/api.ecommerce.techpath.pro/public_html 
+
+   ``` 
+
+ 
+
+Now, any user who is a member of the `mygroup` group will have group-level access to the directory, allowing them to read, write, and execute files within it, depending on the directory's permissions. 

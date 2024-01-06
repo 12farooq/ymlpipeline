@@ -1,0 +1,571 @@
+[11/29/23 6:51 PM] Farooq Ahmad
+git command for creating repo for all hello.sh file
+ 
+git clone ssh://farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git
+
+>git checkout -b master 
+
+output:
+
+      Switched to a new branch  Switched to a new branch 'master'
+ 
+>git checkout -b bash_file
+
+output:
+ 
+Switched to a new branch 'bash_file'
+ 
+r>code .  
+
+server ke cmd me jakar ek hello.sh file create ki usme code copy kiya phir (control+s) se save kiya aur phir cmd me aagai server ke.
+ 
+git status
+ 
+output:
+
+On branch bash_file
+
+No commits yet
+ 
+Untracked files:
+
+  (use "git add <file>..." to include in what will be committed)
+
+        hello.sh (red colour show karta hai kyo ki add nhi hai)
+ 
+nothing added to commit but untracked files present (use "git add" to track)
+
+>git add .
+ 
+output:
+
+On branch bash_file
+ 
+No commits yet
+ 
+Changes to be committed:
+
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   hello.sh (green show karti hai add hony ke bad)
+ 
+git commit -m "done"
+ 
+output:
+
+[bash_file (root-commit) 8682819] done
+
+1 file changed, 42 insertions(+)
+
+create mode 100644 hello.sh
+ 
+ 
+git push origin bash_file
+ 
+output:
+
+farooq.ahmad@192.168.1.3's password:
+
+Enumerating objects: 3, done.
+
+Counting objects: 100% (3/3), done.
+
+Delta compression using up to 4 threads
+
+Compressing objects: 100% (2/2), done.
+
+Writing objects: 100% (3/3), 691 bytes | 230.00 KiB/s, done.
+
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+
+To ssh://192.168.1.3:/volume1/git/techpath/server.git
+
+* [new branch]      bash_file -> bash_file
+
+[11/30/23 12:21 PM] Farooq Ahmad
+#!/bin/bash
+ 
+# Update package lists
+
+sudo apt update
+ 
+# Install MySQL Server
+
+sudo apt install -y mysql-server
+ 
+# Secure the MySQL installation
+
+sudo mysql_secure_installation
+ 
+# Install Nginx
+
+sudo apt install -y nginx
+ 
+# Install PHP 7.4 and required extensions
+
+sudo apt install -y php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-mbstring php7.4-xml
+ 
+# Configure Nginx to use PHP
+
+sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+
+sudo cp /etc/nginx/sites-available/default.bak /etc/nginx/sites-available/default
+ 
+# Update the Nginx default site configuration to use PHP
+
+sudo sed -i 's/index index.html/index index.php index.html/' /etc/nginx/sites-available/default
+
+sudo sed -i 's/#location ~ \\\.php$ {/location ~ \\\.php$ {/' /etc/nginx/sites-available/default
+
+sudo sed -i 's/#\tfastcgi_pass unix:/var/run/php/php7.4-fpm.sock;/\tfastcgi_pass unix:\/var\/run\/php\/php7.4-fpm.sock;/g' /etc/nginx/sites-available/default
+
+sudo sed -i 's/#\tfastcgi_index index.php;/\tfastcgi_index index.php;/' /etc/nginx/sites-available/default
+
+sudo sed -i 's/#\tfastcgi_param SCRIPT_FILENAME \\\$document_root\\\$fastcgi_script_name;/\tfastcgi_param SCRIPT_FILENAME \\\$document_root\\\$fastcgi_script_name;/g' /etc/nginx/sites-available/default
+
+sudo sed -i 's/#\tinclude fastcgi_params;/\tinclude fastcgi_params;/' /etc/nginx/sites-available/default
+
+sudo sed -i 's/#}/}/' /etc/nginx/sites-available/default
+ 
+# Restart Nginx to apply changes
+
+sudo systemctl restart nginx
+ 
+# Display PHP version
+
+php -v
+ 
+# Display Nginx version
+
+nginx -v
+ 
+# Display MySQL version
+
+mysql --version
+[11/30/23 12:23 PM] Farooq Ahmad
+#!/bin/bash
+ 
+# Update package list
+
+sudo apt update
+ 
+# Install Apache
+
+sudo apt install -y apache2
+ 
+# Install MySQL Server
+
+sudo apt install -y mysql-server
+ 
+# Secure MySQL installation (optional)
+
+# This will prompt you to set a password for the MySQL root user and perform other security configurations.
+
+sudo mysql_secure_installation
+ 
+# Install PHP and necessary extensions
+
+sudo apt install -y php7.4 libapache2-mod-php7.4 php7.4-mysql php7.4-curl php7.4-json php7.4-cgi
+ 
+# Restart Apache to apply changes
+
+sudo systemctl restart apache2
+ 
+# Check installed versions
+
+echo "Installed versions:"
+
+apache2 -v
+
+mysql --version
+
+php --version7.4
+ 
+# Display additional instructions if needed
+
+echo "LAMP stack installation completed. You may need to configure additional settings based on your requirements."
+ 
+# End of script
+
+[11/30/23 12:24 PM] Farooq Ahmad
+for python 
+[11/30/23 12:24 PM] Farooq Ahmad
+#!/bin/bash
+ 
+#Create directories and set permissions
+ 
+ 
+echo "# Create directories and set permissions 
+
+      sudo mkdir -p /var/www/farooq.techpath.pro/public_html 
+ 
+      sudo chown -R $USER:$USER /var/www/farooq.techpath.pro/public_html 
+ 
+      sudo chmod -R 755 /var/www/farooq.techpath.pro/public_html 
+ 
+      sudo find /var/www/farooq.techpath.pro/public_html -type d - exec chmod g+s {} \; 
+ 
+      # Edit the Nginx configuration file
+
+      sudo nano /etc/nginx/sites-available/farooq.techpath.pro
+ 
+      # Add the Nginx server block configuration 
+
+echo " 
+
+server { 
+
+    listen 80; 
+
+    server_name farooq.techpath.pro; 
+
+    root /var/www/farooq.techpath.pro/public_html; 
+
+    index index.php index.html; 
+
+    location / { 
+
+        try_files \$uri \$uri/ /index.php?\$args; 
+
+    } 
+
+    location ~ \.php$ { 
+
+        include snippets/fastcgi-php.conf; 
+
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock; # Adjust the PHP version as needed 
+
+    } 
+
+    location ~ /\.ht { 
+
+        deny all; 
+
+    } 
+
+} 
+
+"
+ 
+    sudo tee -a /etc/nginx/sites-available/priti.techpath.pro 
+
+    # Create a symbolic link to enable the site
+
+    sudo ln -s /etc/nginx/sites-available/priti.techpath.pro /etc/nginx/sites-enabled/ 
+
+    # Test Nginx configuration and restart
+
+    sudo nginx -t
+
+    sudo systemctl restart nginx  "
+ 
+ 
+[11/30/23 4:52 PM] Farooq Ahmad
+#!/bin/bash
+
+domain="test.techpath.pro"
+
+ip="192.168.1.38"
+
+sudo mkdir -p /var/www/"$domain"/public_html
+
+sudo chown -R $USER:$USER /var/www/"$domain"/public_html
+
+sudo chmod -R 755 /var/www/"$domain"/public_html
+
+sudo find /var/www/"$domain"/public_html -type d -exec chmod g+s {} \;
+
+# Define the file content
+
+file_content="""server {
+
+    listen 80; 
+
+    server_name "$domain" www."$domain";
+
+    location / {
+
+        proxy_pass 192.168.1.38;  # Adjust the port if needed
+
+        proxy_set_header Host $host;
+
+        proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    }
+
+} 
+
+"""
+
+# Create hello.txt file
+
+echo "$file_content" > /etc/nginx/sites-available/"$domain"
+
+sudo ln -s /etc/nginx/sites-available/"$domain" /etc/nginx/sites-enabled/
+
+sudo nginx -t
+
+sudo systemctl restart nginx
+ 
+# Display a message indicating the file creation
+
+echo "Site $domain is hosted!"
+[11/30/23 5:27 PM] Farooq Ahmad
+ 
+ 
+[11/30/23 6:29 PM] Farooq Ahmad
+farooq.ahmad
+
+G]Rv$8W8
+ 
+all .sh code has been pushed in feature/scripts branch
+[12/1/23 7:12 PM] Farooq Ahmad
+git clone ssh://farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git
+
+farooq.ahmad
+
+G]Rv$8W8
+ 
+feature/scripts
+ 
+.sh code has been pushed in feature/scripts branch
+ 
+ 
+git clone
+ 
+git checkout -b master
+ 
+git checkout -b feature/scripts
+ 
+code .
+ 
+git status
+ 
+git add .
+ 
+git commit -m "done"
+ 
+git push origin feature/scripts
+ 
+git log
+
+[12/7/23 4:49 PM] Farooq Ahmad
+git command we use.
+ 
+git clone [url]
+
+git add [file]
+
+git status
+
+git init 
+
+git commit -m “[descriptive message]”
+
+git reset [file]
+
+git branch
+
+git diff --staged
+
+git merge [branch]
+
+git branch [branch-name]
+
+git checkout
+
+git log
+
+git log branchB..branchA
+
+git diff branchB...branchA
+
+git show [SHA]
+
+git log --follow [file]
+
+git log --stat -M
+
+git config --global core.excludesfile [file
+
+git rm [file]
+
+git mv [existing-path] [new-path]
+
+git merge [alias]/[branch]
+
+git remote add [alias] [url]
+
+git fetch [alias]
+
+git push [alias] [branch]
+
+git reset --hard [commit]
+
+git pull
+
+git rebase [branch]
+
+git stash
+
+git stash list
+
+git stash pop
+
+git stash drop
+[12/7/23 7:07 PM] Farooq Ahmad
+git command for push code in repo
+ 
+git clone ssh://farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git
+
+>git checkout -b master 
+
+output:
+
+      Switched to a new branch  Switched to a new branch 'master'
+ 
+>git checkout -b bash_file3
+
+output:
+ 
+Switched to a new branch 'feature/scripts'
+ 
+r>code .  
+
+server ke cmd me jakar ek hello.sh file create ki usme code copy kiya phir (control+s) se save kiya aur phir cmd me aagai server ke.
+ 
+git status
+ 
+output:
+
+On branch bash_file
+
+No commits yet
+ 
+Untracked files:
+
+  (use "git add <file>..." to include in what will be committed)
+
+        hello.sh (red colour show karta hai kyo ki add nhi hai)
+ 
+nothing added to commit but untracked files present (use "git add" to track)
+
+>git add .
+ 
+output:
+
+On branch bash_file
+ 
+No commits yet
+ 
+Changes to be committed:
+
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   hello.sh (green show karti hai add hony ke bad)
+ 
+git commit -m "done"
+ 
+output:
+
+[bash_file (root-commit) 8682819] done
+
+1 file changed, 42 insertions(+)
+
+create mode 100644 hello.sh
+ 
+ 
+git push origin feature/scripts
+ 
+output:
+
+farooq.ahmad@192.168.1.3's password:
+
+Enumerating objects: 3, done.
+
+Counting objects: 100% (3/3), done.
+
+Delta compression using up to 4 threads
+
+Compressing objects: 100% (2/2), done.
+
+Writing objects: 100% (3/3), 691 bytes | 230.00 KiB/s, done.
+
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+
+To ssh://192.168.1.3:/volume1/git/techpath/server.git
+
+[12/8/23 6:00 PM] Farooq Ahmad
+# Switch to the target branch
+
+git checkout feature/scripts
+ 
+# Merge branchB into feature/scripts
+
+git merge branchB
+ 
+# Resolve conflicts if any and commit the merge
+
+git merge --continue
+ 
+# Commit the merge
+
+git commit -m "Merge branchB into feature/scripts"
+ 
+# Push changes to the remote repository
+
+git push origin feature/scripts
+
+[12/12/23 6:32 PM] Farooq Ahmad
+farooq.ahmad
+
+G]Rv$8W8
+ 
+all .sh code has been pushed in feature/scripts branch
+ 
+ 
+git clone ssh://farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git
+[12/14/23 4:17 PM] Farooq Ahmad
+https://github.com/12farooq/practicerepo-.git
+[12/14/23 4:27 PM] Farooq Ahmad
+ecom-django-backend.zip
+[12/14/23 6:20 PM] Farooq Ahmad
+git clone ssh://farooq.ahmad@192.168.1.3:/volume1/git/techpath/server.git
+
+git clone https://github.com/12farooq/practicerepo-.git
+
+G]Rv$8W8
+
+git config --global user.name "Farooq"
+
+git config --global user.email "Farooq@techpat.biz
+
+ls
+
+dir
+
+>git branch
+
+code .
+
+git add .
+
+git commit -m "done"
+
+git push origin branchA
+GitHub - 12farooq/practicerepo-
+Contribute to 12farooq/practicerepo- development by creating an account on GitHub.
+[12/15/23 12:33 PM] Farooq Ahmad
+# Delete a local branch
+
+git branch -d ranchC
+ 
+# Force delete a local branch (use with caution)
+
+git branch -D ranch
+ 
+# Delete a remote branch
+
+git push origin --delete ranch

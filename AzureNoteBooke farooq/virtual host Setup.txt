@@ -1,0 +1,471 @@
+virtual host Setup
+
+Introduction 
+
+ 
+
+Apache uses virtual hosts to run more than one website on a single server with a single public IP address. You can secure and manage multiple websites on the same server by creating the appropriate permissions and ownerships in the directory structure. 
+
+  
+
+In this tutorial, you'll create a virtual host environment to run multiple websites with Apache on your Ubuntu 20.04 LTS server. 
+
+ 
+
+Prerequisites 
+
+To complete this guide, you need the following: 
+
+  
+
+An Vultr Ubuntu 20.04 cloud server. 
+
+  
+
+A sudo user. 
+
+  
+
+A LAMP Stack. 
+
+  
+
+Domain names that point to the IP address of your VPS server. Refer to the Vultr's DNS guide to set up name servers for your domains. For demonstration purposes, this guide uses the domains example.com, example.net, and example.org. 
+
+ 
+
+ 
+
+1. Set Up a Directory Structure 
+
+ 
+
+1.The default document root for Apache is /var/www. You'll need to create a separate directory for each site. Replace example.com, example.net, and example.org with the domain names of your websites. 
+
+  
+
+$ sudo mkdir -p /var/www/example.com/public_html    
+ 
+
+$ sudo mkdir -p /var/www/example.net/public_html  
+ 
+
+$ sudo mkdir -p /var/www/example.org/public_html  
+
+ 
+
+ 
+
+2 .The root user owns the directories you've just created. Change the ownership to the currently logged-in user. This will allow you to change the content without permission errors. 
+
+  
+
+$ sudo chown -R $USER:$USER /var/www/example.com/public_html  
+
+$ sudo chown -R $USER:$USER /var/www/example.net/public_html  
+
+$ sudo chown -R $USER:$USER /var/www/example.org/public_html  
+
+ 
+
+ 
+
+  
+
+3.Change the permission settings for the above directories to 755. This allows everyone, including web visitors, to have read and execute permissions on those directories and their contents. However, only the owner of the files ($USER in this case) has write permissions. 
+
+  
+
+$ sudo chmod -R 755 /var/www/example.com/public_html  
+
+ 
+ 
+
+$ sudo chmod -R 755 /var/www/example.net/public_html  
+
+ 
+ 
+
+$ sudo chmod -R 755 /var/www/example.org/public_html  
+
+ 
+
+ 
+
+  
+
+4.Make sure the files in these directories inherit the parent's directory group ownership. 
+
+  
+
+$ sudo find /var/www/example.com/public_html -type d -exec chmod g+s {} \;  
+
+ 
+ 
+
+$ sudo find /var/www/example.net/public_html -type d -exec chmod g+s {} \;  
+
+ 
+ 
+
+$ sudo find /var/www/example.org/public_html -type d -exec chmod g+s {} \;  
+
+ 
+
+ 
+
+ 
+
+2. Create Virtual Host Files 
+
+ 
+
+Create a separate virtual host configuration file under the /etc/apache2/sites-available directory for each domain you intend to host on your server. 
+
+ 
+
+Configure example.com 
+
+$ sudo nano /etc/apache2/sites-available/example.com.conf 
+
+ 
+
+Add the content below into the example.com virtual host configuration file. Provide an email address to the ServerAdmin entry. This is the contact address that Apache includes when returning an error to a client visiting your site. Issue the right path to the DocumentRoot directive. This tells Apache the directory to serve content from for any request matching the value of the ServerName. Apache records information about any errors on the ErrorLog file while the CustomLog file logs all information that occurs in your Apache server. 
+
+ 
+
+<VirtualHost *:80>  
+
+ 
+ 
+
+    ServerName example.com  
+
+ 
+ 
+
+    ServerAdmin admin@example.com  
+
+ 
+ 
+
+    DocumentRoot /var/www/example.com/public_html  
+
+ 
+ 
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log  
+
+ 
+ 
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined  
+
+ 
+ 
+
+</VirtualHost>  
+
+ 
+
+ 
+
+ Save and close the file. 
+
+ 
+
+ 
+
+Configure example.net 
+
+Create a configuration file for the example.net website. 
+
+  
+
+$ sudo nano /etc/apache2/sites-available/example.net.conf 
+
+Add the content below into the example.net virtual host configuration file. 
+
+ 
+
+<VirtualHost *:80>  
+
+ 
+ 
+
+    ServerName example.net  
+
+ 
+ 
+
+    ServerAdmin admin@example.net  
+
+ 
+ 
+
+    DocumentRoot /var/www/example.net/public_html  
+
+ 
+ 
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log  
+
+ 
+ 
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined  
+
+ 
+ 
+
+</VirtualHost>  
+
+ 
+
+Save and close the file. 
+
+ 
+
+Configure example.org 
+
+Create the third virtual host configuration file for example.org. 
+
+  
+
+$ sudo nano /etc/apache2/sites-available/example.org.conf 
+
+Add the content below into the example.org virtual host configuration file. 
+
+<VirtualHost *:80>  
+
+ 
+ 
+
+    ServerName example.org  
+
+ 
+ 
+
+    ServerAdmin admin@example.org  
+
+ 
+ 
+
+    DocumentRoot /var/www/example.org/public_html  
+
+ 
+ 
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log  
+
+ 
+ 
+
+    CustomLog ${APACHE_LOG_DIR}/access.log combined  
+
+ 
+ 
+
+</VirtualHost>  
+
+ 
+
+Save and close the file. 
+
+ 
+
+3. Configure and Restart Apache 
+
+ 
+
+Enable these host files by running the a2ensite command for each configuration file. 
+
+ 
+
+$ sudo a2ensite example.com.conf  
+
+ 
+ 
+
+$ sudo a2ensite example.org.conf  
+
+ 
+ 
+
+$ sudo a2ensite example.net.conf  
+
+ 
+
+Disable the default virtual configuration file using the a2dissite command. 
+
+  
+
+$ sudo a2dissite 000-default.conf  
+
+ 
+
+ 
+
+Restart Apache to load the new configuration files. 
+
+  
+
+$ sudo systemctl restart apache2  
+
+ 
+
+ 
+
+4. Create Content For the Websites 
+
+ 
+
+Your sites are now ready to serve content. Start by creating a new HTML document for example.com. 
+
+  
+
+$ sudo nano /var/www/example.com/public_html/index.html 
+
+Add the content below into the file. 
+
+  
+
+<html>   
+
+  <head>   
+
+    <title>This is example.com website</title>   
+
+  </head>   
+
+  <body>   
+
+    <h1>This is <b>example.com</b> website.</h1>   
+
+  </body>   
+
+</html>   
+
+ 
+
+ 
+
+Save and close the file. 
+
+  
+
+Create a new HTML document for example.net. 
+
+  
+
+$ sudo nano /var/www/example.net/public_html/index.html 
+
+ 
+
+Add the content below to the file. 
+
+  
+
+<html> 
+
+  <head> 
+
+    <title>This is example.net website</title> 
+
+  </head> 
+
+  <body> 
+
+    <h1>This is <b>example.net</b> website.</h1> 
+
+  </body> 
+
+</html> 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Save and close the file. 
+
+  
+
+Create a new HTML document for example.org. 
+
+  
+
+$ sudo nano /var/www/example.org/public_html/index.html 
+
+ 
+
+Add the content below to the file. 
+
+  
+
+<html>   
+
+  <head>   
+
+    <title>This is example.org website</title>   
+
+  </head>   
+
+  <body>   
+
+    <h1>This is <b>example.org</b> website.</h1>   
+
+  </body>  
+
+</html>   
+
+ 
+
+ 
+
+Save and close the file. 
+
+ 
+
+ 
+
+5. Test the Websites 
+
+ 
+
+Visit the URLs below on a web browser. Apache webserver should now serve the right content for each site. 
+
+ 
+
+http://example.com 
+
+  
+
+This is example.com website. 
+
+ 
+
+http://example.net 
+
+ 
+
+This is example.net website. 
+
+ 
+
+http://example.org 
+
+  
+
+This is example.org website. 
+
+ 
+
+Conclusion 
+
+In this tutorial, you've set up virtual hosts with Apache on Ubuntu 20.04. Use the settings in this guide to run multiple websites on your single Ubuntu 20.04 VPS. 

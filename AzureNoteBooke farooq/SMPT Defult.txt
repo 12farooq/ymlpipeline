@@ -1,0 +1,38 @@
+
+SMPT Default
+Install the necessary packages: 
+Open a terminal and run the following command to install the required packages: 
+ 
+shellCopy code 
+sudo apt-get install sendmail  
+This will install the Sendmail mail transfer agent, which is commonly used as the default mailer for PHP on Ubuntu. 
+
+Configure Sendmail: 
+Once the installation is complete, you'll need to configure Sendmail. Open the Sendmail configuration file using a text editor: 
+ 
+shellCopy code 
+sudo nano /etc/mail/sendmail.mc  
+
+Locate the line that starts with dnl define(SMART_HOST', 'smtp.your.provider')and remove thednlat the beginning to uncomment the line. This line sets the SMTP server that Sendmail will use to send emails. Replacesmtp.your.provider` with the address of your SMTP server. If you don't have an SMTP server, you can use your ISP's SMTP server or a third-party service like Gmail. 
+
+Save the changes and exit the text editor. 
+
+Regenerate the Sendmail configuration: 
+After modifying the sendmail.mc file, you need to regenerate the Sendmail configuration file by running the following command in the terminal: 
+ 
+shellCopy code 
+sudo sendmailconfig  
+This will update the configuration files based on the changes you made. 
+
+Restart Sendmail: 
+Finally, restart the Sendmail service to apply the new configuration: 
+ 
+shellCopy code 
+sudo service sendmail restart  
+Sendmail should now be enabled as the default mailer for PHP on your Ubuntu system. 
+
+Please note that the above steps assume you have a basic understanding of using the command line in Ubuntu. If you encounter any issues or need further assistance, feel free to ask for help. 
+
+ 
+
+From <https://chat.openai.com/>  

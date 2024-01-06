@@ -1,0 +1,81 @@
+Symlink-Folder
+
+
+
+To point the `/var/www/` folder to a location under `/media/server/data-5121/`, you can use symbolic links (symlinks). Here are the steps to achieve this: 
+
+ 
+
+1. **Backup Your Data (Optional):** Before making significant changes like this, it's always a good idea to back up your data to prevent accidental data loss. 
+
+ 
+
+2. **Move Your Data (If Necessary):** If there's any data in `/var/www/` that you want to keep, move it to the new location `/media/server/data-5121/`. 
+
+ 
+
+3. **Create a Symlink:** 
+
+ 
+
+   Open a terminal and use the `ln` command to create a symbolic link. Replace `/media/server/data-5121/` with the full path to your desired target folder. 
+
+ 
+
+   ```bash 
+
+   sudo ln -s /media/server/data-5121/ /var/www 
+
+   ``` 
+
+ 
+
+   This command creates a symbolic link named `/var/www` that points to `/media/server/data-5121/`. 
+
+ 
+
+4. **Verify the Symlink:** 
+
+ 
+
+   You can verify that the symlink has been created correctly by listing the contents of `/var/www/`: 
+
+ 
+
+   ```bash 
+
+   ls -l /var/www 
+
+   ``` 
+
+ 
+
+   You should see something like: 
+
+ 
+
+   ``` 
+
+   lrwxrwxrwx 1 root root 27 Sep 23 10:00 /var/www -> /media/server/data-5121/ 
+
+   ``` 
+
+ 
+
+   The arrow (`->`) indicates the symlink. 
+
+ 
+
+5. **Test Your Web Server:** 
+
+ 
+
+   If you are using a web server (e.g., Apache or Nginx), make sure to update the server configuration to point to the new path (`/var/www/`) if necessary. 
+
+ 
+
+6. **Restart Services (If Needed):** Depending on your setup, you may need to restart your web server or other services that use the webroot folder to apply the changes. 
+
+ 
+
+Now, your `/var/www/` folder should effectively point to `/media/server/data-5121/`. Any content placed in `/var/www/` will be stored in the `/media/server/data-5121/` location. 

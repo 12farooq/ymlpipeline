@@ -1,0 +1,30 @@
+Azure and AWS are both cloud computing platforms that offer a wide range of services for building, deploying, and managing applications and services in the cloud. Here is a comparison of the two platforms: 
+
+ 
+Azure Vs AWS
+
+
+Service Offering: 
+Azure and AWS offer a similar range of services, such as compute, storage, networking, databases, and security. However, AWS has a wider range of services and a more established ecosystem of third-party integrations and tools.  
+
+Compute: 
+Both platforms offer virtual machines, containers, and serverless computing. Azure has a proprietary serverless computing service called Azure Functions, while AWS has its own proprietary container orchestration service called Amazon Elastic Container Service (ECS).  
+
+Storage: 
+Both platforms offer object storage, block storage, and file storage. However, AWS has more options for storage, such as Amazon S3 Glacier for archival storage, and Amazon Elastic File System for fully managed file storage.  
+
+Networking: 
+Both platforms offer virtual private cloud (VPC) and load balancing services. However, AWS has more networking services, such as Amazon Route 53 for domain name system (DNS) and Amazon Direct Connect for dedicated network connections.  
+
+Database: 
+Both platforms offer a wide range of database options, such as relational databases, NoSQL databases, and data warehousing. However, AWS has more database options, such as Amazon Aurora for a MySQL and PostgreSQL compatible relational database, and Amazon Redshift for petabyte-scale data warehousing.  
+
+Security: 
+Both platforms have a wide range of security services, such as identity and access management (IAM), encryption, and compliance. However, AWS has more compliance certifications and offers more security tools, such as Amazon Inspector for automated security assessments and Amazon GuardDuty for threat detection. 
+
+ Pricing: 
+Both platforms offer a pay-as-you-go pricing model, where you only pay for what you use. However, pricing varies by service and region, so it is important to compare pricing for specific services and regions. 
+
+  
+
+Overall, Azure and AWS are both powerful cloud computing platforms that offer similar services, but with differences in their offerings, pricing, and ecosystems. The choice between the two platforms depends on your specific requirements and preferences

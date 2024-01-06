@@ -1,0 +1,22 @@
+
+About Azure 
+
+Azure is a cloud computing platform offered by Microsoft that provides a wide range of services for building, deploying, and managing applications and services in the cloud. Here are the basic steps to get started with Azure: 
+
+ 
+
+Create an Azure account: The first step is to sign up for an Azure account, which can be done through the Azure website. You will need to provide some basic information, such as your name and email address, and create a password. 
+
+Choose a subscription: Azure offers a variety of subscription options, ranging from free trial accounts to paid subscriptions with different levels of service and support. Choose the subscription that best fits your needs. 
+
+Create a resource group: A resource group is a logical container for Azure resources, such as virtual machines, storage accounts, and networking resources. You can create a resource group from the Azure portal, and assign it a name and a region. 
+
+Create a virtual machine: A virtual machine is a virtualized computer that runs in the cloud. You can create a virtual machine from the Azure portal, and choose the operating system, disk size, and other configuration options. 
+
+Deploy an application: Once you have created a virtual machine, you can deploy your application to it. This can be done through various methods, such as FTP, Git, or through the Azure portal. 
+
+Monitor and manage your resources: Azure provides a variety of tools for monitoring and managing your resources, such as the Azure portal, Azure CLI, and Azure PowerShell. You can use these tools to view performance metrics, set up alerts, and manage your resources. 
+
+  
+
+These are just the basic steps for getting started with Azure. As you become more familiar with the platform, you can explore its many other services and features, such as Azure Functions, Azure DevOps, and Azure Machine Learning. 
